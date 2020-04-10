@@ -8,19 +8,21 @@ using namespace std;
 #define ppb() pop_back()
 #define endl "\n"
 
-int n = 4;
-
-void fastio() {
-	#ifndef ONLINE_JUGDE
-	freopen("input.txt","r",stdin);
-	freopen("output.txt","w",stdout);
-	freopen("error.txt","w",stderr);
-	#endif	
+void fastio(bool read = false) {
+	if(read) {
+		#ifndef ONLINE_JUGDE
+		freopen("input.txt","r",stdin);
+		freopen("output.txt","w",stdout);
+		freopen("error.txt","w",stderr);
+		#endif	
+	}
 	ios_base::sync_with_stdio(false);
 	cin.tie(0);
 	cout.tie(0);
 	return;
 }
+
+int = 4;
 
 // 4*4
 
@@ -42,7 +44,7 @@ int ways(int k) {
 }
 
 int main(){
-	fastio();
+	fastio(true);
 	int t,k;
 	cin >> t;
 	while(t--) {
