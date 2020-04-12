@@ -45,17 +45,18 @@ bool canPlace(char**grid,int i,int j,int n) {
 	return true;
 }
 
-bool placesQueens(char**grid,int i,int n) {
+bool placesQueens(char**grid,int i,int n,int &result) {
 	// Base Case.
 	if(i == n) {
-		printBoard(grid,n);
+		// printBoard(grid,n);
+		result++;
 		return false;		
 	}
 	// Recursive case.
 	for(int j = 0; j < n; ++j) {
 		if(canPlace(grid,i,j,n)) {
 			grid[i][j] = 'Q';
-			bool res = placesQueens(grid,i+1,n);
+			bool res = placesQueens(grid,i+1,n,result);
 			if(res) return true;
 			// backtracking step when solution not possible.
 			grid[i][j] = '_';
@@ -79,7 +80,9 @@ int main() {
 			grid[i][j] = '_';
 		}
 	}
-	placesQueens(grid,0,n);
+	int result = 0;
+	placesQueens(grid,0,n,result);
+	cout << result << endl;
 	return 0;
 }
 
