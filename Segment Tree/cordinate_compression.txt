@@ -1,5 +1,0 @@
-In the previous inversion count problem the solution will fail as 
-
-1. It will not work for the negative number as we don't have the negative index in the bit array.
-2. It will take the more memory if the range of the numbers is very 	high.
-
