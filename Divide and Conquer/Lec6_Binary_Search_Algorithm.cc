@@ -18,6 +18,7 @@ void fastio(bool read = true) {
 	return;
 }
 
+
 int binary_search(int *arr,int n,int k) {
 	int s = 0;
 	int e = n-1;
