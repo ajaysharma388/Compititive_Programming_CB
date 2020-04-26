@@ -18,6 +18,20 @@ void fastio(bool read = false) {
 	return;
 }
 
+bool isPossible(int *books,int n,int student,int pages) {
+	int s = 1;
+	int page = 0;
+	for(int i = 0; i < n; ++i) {
+		if(page + books[i] > pages) {
+			s++;
+			page = books[i];
+			if(s > student) return false;
+		}
+		else page += books[i];
+	}
+	return true;
+}
+
 bool checkIfPossible(int *books,int n,int student,int pages) {
 	int s = 1;
 	int page = 0;
