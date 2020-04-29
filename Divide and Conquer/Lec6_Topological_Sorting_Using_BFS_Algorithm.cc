@@ -27,7 +27,7 @@ public:
 		if(bidir) this->AdjList[dest].push_back(src);
 	}
 
-	void printList() {
+	void printAdjList() {
 		for(auto node : this->AdjList) {
 			cout << node.first << " -> ";
 			for(auto nbr : node.second) 
@@ -36,29 +36,26 @@ public:
 		}
 	}
 
-	void dfs(T src,unordered_map<T,bool> &visited) {
+	void dfs(T src,unordered_map<T,bool> &visited,list<T> &order) {
 		// setting up the source node as visited.
-		cout << src << " ,";
 		visited[src] = true;
 		for(auto nbr : this->AdjList[src]) 
-			if(!visited[nbr]) dfs(nbr,visited);
+			if(!visited[nbr]) dfs(nbr,visited,order);
+		order.push_front(src);
 		return;
 	}
 
-	int countCCInGraph() {
+	void topologicalSort() {
 		unordered_map<T,bool> visited;
+		list<T> order;
 		for(auto node : this->AdjList) 
 			visited[node.first] = false;
-		int count = 0;
-		for(auto node : this->AdjList) {
-			if(!visited[node.first]) {
-				count += 1;
-				cout << "Component Count No." << count << " : ";
-				dfs(node.first,visited);
-				cout << endl;
-			}
-		}
-		return count;
+		for(auto node : this->AdjList) 
+			if(!visited[node.first]) dfs(node.first,visited,order);
+		for(T e : order) 
+			cout << e << " ,";
+		cout << endl;
+		return;
 	}
 };
 
@@ -70,9 +67,23 @@ int main(){
 	while(e--) {
 		int u, v;
 		cin >> u >> v;
-		g.addEdge(u,v);
+		g.addEdge(u,v,false);
 	}
-	int count = g.countCCInGraph();
-	cout << "No. Of Connected Component's : " << count << endl;
+	g.topologicalSort();
 	return 0;
 }
+
+// Sample Input :
+
+// 7
+// 1 2
+// 1 3
+// 2 4
+// 4 5
+// 3 5
+// 6 7
+// 5 7
+
+// Sample Output :
+
+// 6 ,1 ,3 ,2 ,4 ,5 ,7 ,
