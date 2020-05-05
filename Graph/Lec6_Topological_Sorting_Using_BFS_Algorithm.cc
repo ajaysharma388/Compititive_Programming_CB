@@ -1,6 +1,17 @@
+/*==========================
+Author : Ajay Sharma
+date : 04.05.2020
+============================*/
 #include <bits/stdc++.h>
 using namespace std;
 
+
+#define mp make_pair
+#define pb push_back
+#define F first
+#define S second
+#define vi(n) vector<long long int>
+#define vii(m,n) vector<m, vector<long long int>(n,0)>
 #define ll long long int
 #define endl "\n"
 
@@ -23,41 +34,44 @@ class Graph {
 	map<T,list<T>> AdjList;
 public:
 	void addEdge(T src, T dest, bool bidir = true) {
-		this->AdjList[src].push_back(dest);
-		if(bidir) this->AdjList[dest].push_back(src);
+		this->AdjList[src].pb(dest);
+		if(bidir) this->AdjList[dest].pb(src);
 	}
 
 	void printAdjList() {
 		for(auto node : this->AdjList) {
-			cout << node.first << " -> ";
-			for(auto nbr : node.second) 
+			cout << node.F << " -> ";
+			for(auto nbr : node.S) 
 				cout << nbr << " ,";
 			cout << endl;
 		}
 	}
 
-	void dfs(T src,unordered_map<T,bool> &visited,list<T> &order) {
-		// setting up the source node as visited.
-		visited[src] = true;
-		for(auto nbr : this->AdjList[src]) 
-			if(!visited[nbr]) dfs(nbr,visited,order);
-		order.push_front(src);
-		return;
-	}
-
 	void topologicalSort() {
-		unordered_map<T,bool> visited;
-		list<T> order;
+		unordered_map<int,int> indegree;
+		queue<int> Q;
 		for(auto node : this->AdjList) 
-			visited[node.first] = false;
+			indegree[node.F] = 0;
 		for(auto node : this->AdjList) 
-			if(!visited[node.first]) dfs(node.first,visited,order);
-		for(T e : order) 
-			cout << e << " ,";
+			for(T nbr : this->AdjList[node.F]) 
+				indegree[nbr] += 1;
+		for(auto node : this->AdjList) 
+			if (indegree[node.F] == 0) 
+				Q.push(node.F);
+		while(!Q.empty()) {
+			T cur = Q.front();
+			Q.pop();
+			for(T nbr : this->AdjList[cur]) { 
+				indegree[nbr] -= 1;
+				if(indegree[nbr] == 0) Q.push(nbr);
+			}
+			cout << cur << " ,";
+		}
 		cout << endl;
 		return;
 	}
 };
+
 
 int main(){
 	fastio(true);
@@ -87,3 +101,4 @@ int main(){
 // Sample Output :
 
 // 6 ,1 ,3 ,2 ,4 ,5 ,7 ,
+// 1 ,6 ,2 ,3 ,4 ,5 ,7 ,
