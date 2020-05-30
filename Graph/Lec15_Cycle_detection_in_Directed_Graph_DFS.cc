@@ -31,7 +31,7 @@ void fastio(bool read = false) {
 
 template<typename T>
 class Graph{
-	map<T,list<T>> adjList;
+	un_mp<T,list<T>> adjList;
 	public:
 	// Default Constructor.
 	Graph() {}
@@ -51,15 +51,67 @@ class Graph{
 		}
 	}
 
-	bool detect_cycle(un_mp<T,bool> &visited,un_mp<T,bool> &stack) {}
-	
+	bool detect_cycle(T cur,un_mp<T,bool> &visited,un_mp<T,bool> &stack) {
+		visited[cur] = true;
+		stack[cur] = true;
+		// traverse on the neighbours.
+		for(auto nbr : this->adjList[cur]) {
+			if(stack[nbr]) return true;
+			else if(!visited[nbr] and detect_cycle(nbr,visited,stack)) return true;
+		}
+		// since we are leaving the node.
+		stack[cur] = false;
+		return false;
+	}
+
+	bool isCyclic(T src) {
+		un_mp<T,bool> visited;
+		un_mp<T,bool> stack;
+		for(auto p : this->adjList) {
+			visited[p.F] = false;
+			stack[p.F] = false;
+		}
+		return detect_cycle(src,visited,stack);
+	}
 };
 
 int main() {
 	fastio(true);
+	int m,n;
+	// m represents number of vertices & n represents number of edges.
+	cin >> m >> n;
+	Graph<int> g;
+	for(int i = 0; i < n; ++i) {
+		int x,y;
+		cin >> x >> y;
+		g.addEdge(x,y,false);
+	}
+	if(g.isCyclic(0)) cout << "This Graph contains cycle.\n";
+	else cout << "This Graph does not contains cycle.\n";
 	return 0;
 }
 
 // Sample Input :
 
+// 6 6
+// 0 1
+// 0 2
+// 1 5
+// 2 4
+// 4 5
+// 2 3
+
+// 6 7
+// 0 1
+// 0 2
+// 1 5
+// 2 4
+// 4 5
+// 2 3
+// 3 0
+
 // Sample Output :
+
+// This Graph does not contains cycle.
+
+// This Graph contains cycle.
