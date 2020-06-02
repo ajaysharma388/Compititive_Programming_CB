@@ -1,1 +1,1 @@
-Cost Of Minimum Spanning Tree is : 43
+Weight of Minimum Spanning Tree is 43
