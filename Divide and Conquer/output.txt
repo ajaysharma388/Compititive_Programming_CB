@@ -1,1 +1,1 @@
-Weight of Minimum Spanning Tree is 43
+A -> C -> E -> D -> F -> 
