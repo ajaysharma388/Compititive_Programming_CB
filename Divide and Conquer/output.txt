@@ -1,1 +1,1 @@
-A -> C -> E -> D -> F -> 
+Negative cycle: 1 3 2 1 
