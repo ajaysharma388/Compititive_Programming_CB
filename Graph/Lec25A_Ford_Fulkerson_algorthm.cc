@@ -6,7 +6,6 @@ using namespace std;
 #define F first 
 #define S second
 
-
 void fastio(bool read = false) {
 	if(read) {
 		#ifndef ONLINE_JUGDE
@@ -21,6 +20,7 @@ void fastio(bool read = false) {
 	return;
 }
 
+
 // ford_fulkerson algorithm implementation.
 bool bfs(int **Gr,int V,int &src,int &dest,vector<int> &parent) {
 	int visited[V];
@@ -29,6 +29,7 @@ bool bfs(int **Gr,int V,int &src,int &dest,vector<int> &parent) {
 	Q.push(src);
 	parent[src] = -1;
 	visited[src] = true;
+	// bool augumentedPath = false;
 	while(!Q.empty()) {
 		int u = Q.front(); Q.pop();
 		for(int v = 0; v < V; ++v) {
