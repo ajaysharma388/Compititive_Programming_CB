@@ -1,3 +1,2 @@
-Factorial of 8 is 40320
-Factorial of 8 is using TD 40320
-Factorial of 8 is using BU 40320
+150th ugly number is 5832.
+150th ugly number is using BU 5832.
