@@ -1,0 +1,6 @@
+No. Of Ways TD : 26
+No. Of Ways BU : 26
+No. Of Ways TD : 10
+No. Of Ways BU : 10
+No. Of Ways TD : 4
+No. Of Ways BU : 4
